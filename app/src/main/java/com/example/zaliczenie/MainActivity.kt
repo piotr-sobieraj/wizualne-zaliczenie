@@ -67,7 +67,7 @@ fun MainScreen() {
         intent.putExtra("TEXT_KEY", text) // ← dodajemy tekst do intencji
         context.startActivity(intent)
       }) {
-        Text("Wyślij")
+        Text("Send")
       }
     } // ← tu zamykamy Row!
 
@@ -78,7 +78,7 @@ fun MainScreen() {
       },
       modifier = Modifier.fillMaxWidth()
     ) {
-      Text("Drugi guzik")
+      Text("Speak your mind")
     }
   }
 }
