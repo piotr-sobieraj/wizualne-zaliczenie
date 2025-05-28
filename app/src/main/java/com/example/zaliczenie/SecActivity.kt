@@ -10,15 +10,16 @@ import com.example.zaliczenie.ui.theme.ZaliczenieTheme
 class SecActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    val receivedText = intent.getStringExtra("TEXT_KEY") ?: "(brak danych)" // ← odbieramy tekst
     setContent {
       ZaliczenieTheme {
-        SecScreen()
+        SecScreen(text = receivedText)
       }
     }
   }
 }
 
 @Composable
-fun SecScreen() {
-  Text("To jest druga aktywność!")
+fun SecScreen(text: String) {
+  Text("Odebrany tekst: $text")
 }

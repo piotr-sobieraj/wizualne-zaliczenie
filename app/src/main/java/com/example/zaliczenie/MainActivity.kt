@@ -64,6 +64,7 @@ fun MainScreen() {
 
       Button(onClick = {
         val intent = Intent(context, SecActivity::class.java)
+        intent.putExtra("TEXT_KEY", text) // ← dodajemy tekst do intencji
         context.startActivity(intent)
       }) {
         Text("Wyślij")
