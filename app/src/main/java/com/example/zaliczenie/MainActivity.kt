@@ -1,5 +1,6 @@
 package com.example.zaliczenie
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.material3.TextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +42,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
   var text by remember { mutableStateOf("") }
+  val context = LocalContext.current
 
   Column(
     modifier = Modifier
@@ -60,11 +63,12 @@ fun MainScreen() {
       )
 
       Button(onClick = {
-        println("Kliknięto! Tekst: $text")
+        val intent = Intent(context, SecActivity::class.java)
+        context.startActivity(intent)
       }) {
         Text("Wyślij")
       }
-    }
+    } // ← tu zamykamy Row!
 
     // Dolny guzik: na całą szerokość
     Button(

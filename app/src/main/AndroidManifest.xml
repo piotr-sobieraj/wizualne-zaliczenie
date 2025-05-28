@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Zaliczenie"
         tools:targetApi="31">
+
+        <activity android:name=".SecActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
