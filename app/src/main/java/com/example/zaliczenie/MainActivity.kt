@@ -68,10 +68,19 @@ fun MainScreen() {
     } // ← tu zamykamy Row!
 
     // Dolny guzik: na całą szerokość
-
     Button(
       onClick = {
-        Toast.makeText(context, "You said: $text", Toast.LENGTH_SHORT).show()      },
+        val inflater = android.view.LayoutInflater.from(context)
+        val layout = inflater.inflate(R.layout.toast_layout, null)
+
+        val textView = layout.findViewById<android.widget.TextView>(R.id.toast_text)
+        textView.text = "🗣️ You said: $text"
+
+        val toast = Toast(context)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.show()
+      },
       modifier = Modifier.fillMaxWidth()
     ) {
       Text("Speak your mind")
