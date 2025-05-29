@@ -17,6 +17,9 @@ import com.example.zaliczenie.ui.theme.ZaliczenieTheme
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
@@ -69,18 +72,29 @@ class SecActivity : ComponentActivity() {
 fun SecScreen(text: String, channelId: String) {
   val context = LocalContext.current
 
-  Button(onClick = {
-    val notification = NotificationCompat.Builder(context, channelId)
-      .setSmallIcon(android.R.drawable.ic_dialog_info) // możesz dodać własną ikonę
-      .setContentTitle("The mind says: ")
-      .setContentText(text)
-      .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-      .build()
+  // Możesz użyć Column, żeby ułożyć elementy jeden pod drugim
+  androidx.compose.foundation.layout.Column(
+    modifier = androidx.compose.ui.Modifier
+      .padding(16.dp)
+      .fillMaxWidth(),
+    verticalArrangement = androidx.compose.foundation.layout.Arrangement.spacedBy(16.dp)
+  ) {
+    Text(text = "Received text", style = androidx.compose.material3.MaterialTheme.typography.titleMedium)
+    Text(text = text)
 
-    with(NotificationManagerCompat.from(context)) {
-      notify(1, notification)
+    Button(onClick = {
+      val notification = NotificationCompat.Builder(context, channelId)
+        .setSmallIcon(android.R.drawable.ic_dialog_info)
+        .setContentTitle("The mind says:")
+        .setContentText(text)
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        .build()
+
+      with(NotificationManagerCompat.from(context)) {
+        notify(1, notification)
+      }
+    }) {
+      Text("Notify")
     }
-  }) {
-    Text("Notify")
   }
 }
